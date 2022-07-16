@@ -65,7 +65,7 @@ export default function TableListProduct({
 			</Thead>
 			<tbody>
 				{dataProduct.map(({ product, quantity }, i) => (
-					<tr key={i}>
+					<tr key={product.code}>
 						<td>
 							<WrapperImg>
 								<img
@@ -112,6 +112,23 @@ export default function TableListProduct({
 					</tr>
 				))}
 			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>Total</td>
+					<td>
+						{dataProduct
+							.reduce((acc, { product, quantity }) => {
+								return acc + product.price * quantity;
+							}, 0)
+							.toLocaleString('id-ID', {
+								style: 'currency',
+								currency: 'IDR',
+							})}
+					</td>
+				</tr>
+			</tfoot>
 		</TableWrapper>
 	);
 }
