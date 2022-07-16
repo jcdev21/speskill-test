@@ -1,4 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import TableListProduct from '../components/Table';
+
+const Container = styled.div`
+	width: 100%;
+	padding: 5em;
+	background-color: #ebf1f1;
+`;
 
 export default function App() {
 	const [products, setProducts] = useState([]);
@@ -19,24 +27,17 @@ export default function App() {
 
 			const resData = await res.json();
 			setProducts(resData);
-			console.log(resData);
 		};
 
 		getData();
 	}, []);
 
 	return (
-		<div>
-			<ul>
-				{products.map(({ product, quantity }, i) => (
-					<li key={product.code}>
-						<p>{product.code}</p>
-						<h3>{product.name}</h3>
-						<p>{product.price}</p>
-						<p>{product.stock} in Stock</p>
-					</li>
-				))}
-			</ul>
-		</div>
+		<Container>
+			<TableListProduct
+				dataProduct={products}
+				header={['', 'product', 'quantity', 'subtotal']}
+			/>
+		</Container>
 	);
 }
