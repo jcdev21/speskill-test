@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 export default function App() {
-	const [data, setData] = useState([]);
+	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
 		const getData = async () => {
@@ -18,12 +18,25 @@ export default function App() {
 			);
 
 			const resData = await res.json();
-			setData(resData);
+			setProducts(resData);
 			console.log(resData);
 		};
 
 		getData();
 	}, []);
 
-	return <div>App</div>;
+	return (
+		<div>
+			<ul>
+				{products.map(({ product, quantity }, i) => (
+					<li key={product.code}>
+						<p>{product.code}</p>
+						<h3>{product.name}</h3>
+						<p>{product.price}</p>
+						<p>{product.stock} in Stock</p>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
 }

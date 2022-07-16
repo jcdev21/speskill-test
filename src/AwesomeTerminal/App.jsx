@@ -8,13 +8,21 @@ const Wrapper = styled.div`
 	overflow: hidden;
 
 	@media (max-width: 960px) {
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 `;
 
 const Container = styled.div`
 	width: 100%;
-	min-height: 100vh;
+	height: 100vh;
 	background-image: linear-gradient(to right, #00dbde, #fc00ff);
+
+	@media (max-width: 960px) {
+		height: 40vh;
+	}
 `;
 
 export default function App() {

@@ -15,7 +15,11 @@ const Container = styled.div`
 
 	@media (max-width: 960px) {
 		position: relative;
+		border: none;
+		border-radius: 0;
 		transform: rotate(0) translate(0, 0);
+		margin-bottom: 20px;
+		height: 40vh;
 	}
 `;
 
