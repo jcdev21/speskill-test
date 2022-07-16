@@ -12,6 +12,11 @@ const Container = styled.div`
 	position: absolute;
 	display: flex;
 	align-items: flex-end;
+
+	@media (max-width: 960px) {
+		position: relative;
+		transform: rotate(0) translate(0, 0);
+	}
 `;
 
 const Title = styled.h1`
@@ -21,18 +26,18 @@ const Title = styled.h1`
 
 const TimeStamp = styled.p`
 	position: absolute;
-	top: 60%;
-	left: -10px;
+	top: 50%;
+	left: 0px;
 	transform: rotate(90deg);
 `;
 
-export default function Terminal() {
+export default function Terminal({ dateTime }) {
 	return (
 		<Container>
 			<Title>
 				{'<'}SPE / FRONTEND{'>'}
 			</Title>
-			<TimeStamp>21 Juli 2022</TimeStamp>
+			<TimeStamp>{dateTime.toString()}</TimeStamp>
 		</Container>
 	);
 }
