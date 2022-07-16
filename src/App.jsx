@@ -1,37 +1,65 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
+import { Suspense, useState } from 'react';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import AwesomeTerminal from './AwesomeTerminal/App';
+import Products from './Products/App';
+
+const Container = styled.div`
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+`;
+
+const Button = styled.button`
+	border: none;
+	min-width: 20px;
+	background-color: slateblue;
+	color: #eeeeee;
+	font-weight: 700;
+	padding: 10px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+`;
+
+const Homepage = () => {
+	return (
+		<Container>
+			<Link to="/awesome-terminal">
+				<Button>Terminal</Button>
+			</Link>
+			<Link to="/products">
+				<Button>Products</Button>
+			</Link>
+		</Container>
+	);
+};
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
-		<div className="App">
-			<div>
-				<a href="https://vitejs.dev" target="_blank">
-					<img src="/vite.svg" className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://reactjs.org" target="_blank">
-					<img
-						src={reactLogo}
-						className="logo react"
-						alt="React logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</div>
+		<Router>
+			<Routes>
+				<Route path="/" element={<Homepage />} />
+				<Route
+					path="/awesome-terminal"
+					element={
+						<Suspense fallback={<>Loading...</>}>
+							<AwesomeTerminal />
+						</Suspense>
+					}
+				/>
+				<Route
+					path="/products"
+					element={
+						<Suspense fallback={<>Loading...</>}>
+							<Products />
+						</Suspense>
+					}
+				/>
+			</Routes>
+		</Router>
 	);
 }
 
