@@ -45,7 +45,15 @@ const Info = styled.div`
 	}
 `;
 
-export default function TableListProduct({ dataProduct = [], header = [] }) {
+export default function TableListProduct({
+	dataProduct = [],
+	header = [],
+	changeQty,
+}) {
+	const handleChangeQty = (value, index) => {
+		changeQty(value, index);
+	};
+
 	return (
 		<TableWrapper>
 			<Thead>
@@ -84,7 +92,9 @@ export default function TableListProduct({ dataProduct = [], header = [] }) {
 						<td>
 							<input
 								value={quantity}
-								onChange={() => {}}
+								onChange={(e) =>
+									handleChangeQty(e.target.value, i)
+								}
 								placeholder="0"
 							/>
 						</td>

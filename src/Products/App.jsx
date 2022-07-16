@@ -11,6 +11,12 @@ const Container = styled.div`
 export default function App() {
 	const [products, setProducts] = useState([]);
 
+	const changeQty = (value, index) => {
+		const tempProduct = [...products];
+		tempProduct[index].quantity = value;
+		setProducts(tempProduct);
+	};
+
 	useEffect(() => {
 		const getData = async () => {
 			const res = await fetch(
@@ -37,6 +43,7 @@ export default function App() {
 			<TableListProduct
 				dataProduct={products}
 				header={['', 'product', 'quantity', 'subtotal']}
+				changeQty={changeQty}
 			/>
 		</Container>
 	);
